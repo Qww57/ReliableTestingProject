@@ -19,11 +19,23 @@ import org.junit.runners.Parameterized.Parameters;
 import hms.main.HotelManager;
 import hms.model.Room;
 
+/**
+ * Class used in order to all the cases that could happen when using the check in function
+ * from the class {@link HotelManager}.
+ * 
+ * This class is a parameterized class performing three tests (one with a presidential room, one with
+ * a standard room and one with null input) on a set of 15 inputs.
+ * 
+ * @author Quentin
+ *
+ */
 @RunWith(Parameterized.class)
 public class TestHotelManagerCheckIn{
 	
 	public static HotelManager manager;
+	
 	public static Date dateIn = new GregorianCalendar(2016, Calendar.DECEMBER, 8).getTime();
+	
 	public static Date dateOut = new GregorianCalendar(2016, Calendar.DECEMBER, 15).getTime();
 	
 	@BeforeClass
@@ -49,8 +61,12 @@ public class TestHotelManagerCheckIn{
 	}
 	
 	/**
-	 * Cannot put here the room has parameter of this.
-	 * @return
+	 * These parameters are used to cover all the different input cases when performing a check in.
+	 * 
+	 * Rooms couldn't be used here as a parameter since rooms are only instantiate at the same time 
+	 * than the manager.
+	 * 
+	 * @return set of input data for the tests
 	 */
 	@SuppressWarnings("boxing")
 	@Parameters(name = "{index}:{0},{1},{2},{3},{4},{5},{6},{7}")
@@ -84,8 +100,8 @@ public class TestHotelManagerCheckIn{
 				{"X12345", "Gates", "Business", "Microsoft", dateIn, false, "", "The format of the inputted ID is invalid"},
 				
 				// Data set with invalid ethernetAdress
-				{"X12345678", "Gates", "Business", "Microsoft", dateIn, true, "XXX", "The format of the inputted ethernetAddress is invalid"}
-				
+				{"X12345678", "Gates", "Business", "Microsoft", dateIn, true, "XXX", "The format of the inputted "
+						+ "ethernetAddress" + " is invalid"}			
 			});
 	}
 	
@@ -113,6 +129,12 @@ public class TestHotelManagerCheckIn{
 	@Parameter(value=7)
 	public String expectedMessage;
 	
+	/**
+	 * Tests made in case of a presidential room, that is allowed to get internet.
+	 * 
+	 * This test is a bit longer than the other ones since it's also verifying that the check in has been done and registered
+	 * correctly.
+	 */
 	@Test
 	public void testCheckIn_PresidentialRoom(){
 		
@@ -141,6 +163,9 @@ public class TestHotelManagerCheckIn{
 		}
 	}
 	
+	/**
+	 * Test made in case of a standard room that is not allowed to get internet.
+	 */
 	@Test
 	public void testCheckIn_StandardRoom(){
 		
@@ -157,6 +182,9 @@ public class TestHotelManagerCheckIn{
 		}
 	}
 	
+	/**
+	 * Test made in case of a null input instead of a room.
+	 */
 	@Test
 	public void testCheckIn_nullRoom(){	
 		

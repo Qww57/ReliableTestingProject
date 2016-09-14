@@ -29,8 +29,9 @@ public class TestHotelManager {
 	@After
 	public void tearDown(){manager = null;}
 	
-	/*
-	 * Testing the initialization of the hotel manager
+	/**
+	 * Testing that the initialization of the hotel manager and of the hotel
+	 * are corresponding to the xml file.
 	 */
 	@SuppressWarnings("unchecked")
 	@Test
@@ -52,12 +53,16 @@ public class TestHotelManager {
 		assertNotNull(manager.getUI());
 	}
 	
+	/**
+	 * Test of the function findOccupant.
+	 */
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testHotelManager_findingOccupant(){
 		
-		// Performing the check-in
 		Room room = manager.getRoom(0, 0);
+		
+		// Performing the check-in
 		Date dateIn = new GregorianCalendar(2016, Calendar.DECEMBER, 8).getTime();
 		String checkin = manager.checkIn("X12345678", "Gates", "Standard", "Microsoft", dateIn, false, "", room);
 		assertEquals("Success", checkin);
@@ -110,6 +115,10 @@ public class TestHotelManager {
 		assertEquals(0, rooms.size());
 	}
 	
+	
+	/**
+	 * Test of the update of the room rate with correct inputs.
+	 */
 	@Test
 	public void testUpdateRoom(){
 		
@@ -123,6 +132,9 @@ public class TestHotelManager {
 		assertEquals(newRate, room.getRate(), 0.0001);
 	}
 	
+	/**
+	 * Test of the update of the room rate with null input.
+	 */
 	@Test
 	public void testUpdateRoom_NullRoom(){
 		
@@ -132,8 +144,6 @@ public class TestHotelManager {
 			fail("Should have failed since room is null");
 		}catch (Exception e){
 			// Expected behavior
-			System.out.println(e.getMessage());
 		}
 	}
 }
-

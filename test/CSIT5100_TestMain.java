@@ -15,7 +15,11 @@ import org.junit.runners.Suite.SuiteClasses;
 	// Tests on the classes of the model package
 	TestOccupant.class,
 	TestOccupation.class,
-	TestRoom.class
+	TestRoom.class,
+	
+	// Tests on the GUI
+	TestUI.class,
+	TestPanelCheckIn.class
 })
 
 public class CSIT5100_TestMain {

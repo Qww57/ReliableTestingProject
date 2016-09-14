@@ -42,31 +42,10 @@ public class GUITest {
 		assertEquals(checkInPanel.typeField.getSelectedItem(), "Standard");
 		assertFalse(checkInPanel.command.dataServiceRequired);
 	}
-
-	/**
-	 * TODO Add better parameters in order to have a case where it works
-	 */
-	@Test
-	public void test_CheckInPanel() {
-		//Create a HotelManager object
-		HotelManager manager = new HotelManager();
-		
-		//Create a CheckInPanel object
-		CheckInPanel checkInPanel = new CheckInPanel(new CheckInCommand(manager), manager);
-		
-		assertNotNull(checkInPanel.hotelManager);
-		assertNotNull(checkInPanel.command);
-		assertNotNull(checkInPanel.checkInButton);
-		
-		//Mock click action of checkInPanel.checkInButton
-		checkInPanel.checkInButton.doClick();
-			
-		assertEquals(checkInPanel.typeField.getSelectedItem(), "Standard");
-		assertFalse(checkInPanel.command.dataServiceRequired);
-	}
 	
 	/**
-	 * TODO Add better parameters in order to have a case where it works
+	 * TODO Add better parameters in order to have a case where it works 
+	 * And create its own test class
 	 */
 	@Test
 	public void test_CheckOutPanel() {
@@ -86,6 +65,7 @@ public class GUITest {
 	
 	/**
 	 * TODO Add better parameters in order to have a case where it works
+	 * And create its own test class
 	 */
 	@Test
 	public void test_SearchPanel() {
@@ -100,5 +80,4 @@ public class GUITest {
 		//Mock click action of checkInPanel.checkInButton
 		searchPanel.searchButton.doClick();
 	}
-
 }

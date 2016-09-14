@@ -9,6 +9,12 @@ import org.junit.Test;
 import hms.model.Occupant;
 import hms.model.Occupation;
 
+/**
+ * Class testing the behavior of the class {@link Occupation}.
+ * 
+ * @author Quentin
+ *
+ */
 public class TestOccupation {
 
 	@SuppressWarnings("boxing")

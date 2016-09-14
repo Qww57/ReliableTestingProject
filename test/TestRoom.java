@@ -16,6 +16,13 @@ import hms.model.Occupant;
 import hms.model.Occupation;
 import hms.model.Room;
 
+/**
+ * Parameterized class testing the behavior of the class {@link Room} with different
+ * sets of input covering the standard cases, but also containing some null values.
+ * 
+ * @author Quentin
+ *
+ */
 @RunWith(Parameterized.class)
 public class TestRoom {
 
@@ -60,11 +67,9 @@ public class TestRoom {
 	
 	@Before
 	public void setUp(){
-		// Creation of the input of the occupation
+		// Creation of the inputs for the occupation
 		Occupant occupant = new Occupant("X12345678", "Business", "Gates", "Microsoft");
-		Calendar c = GregorianCalendar.getInstance();
-		c.set(2016, 11, 8); // 8th of December 2016
-		Date dateIn = c.getTime();
+		Date dateIn = new GregorianCalendar(2016, Calendar.DECEMBER, 8).getTime();
 		String ethernetService = "01:23:45:67:89:ab";
 		
 		// Initialization of the occupation
@@ -111,6 +116,7 @@ public class TestRoom {
 			// Testing toString method when an occupant has been added
 			toString = room.toString();
 			assertTrue(toString.contains(occupation.getOccupant().getName()));
+			
 			if (typeString != "Standard" && dataService == true){
 				// Checking that the internet service is described
 				assertTrue(toString.contains("Data service: In used"));

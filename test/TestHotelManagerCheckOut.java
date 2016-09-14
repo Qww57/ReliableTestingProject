@@ -17,6 +17,16 @@ import org.junit.runners.Parameterized.Parameters;
 import hms.main.HotelManager;
 import hms.model.Room;
 
+/**
+ * Class used in order to all the cases that could happen when using the check out function
+ * from the class {@link HotelManager}.
+ * 
+ * This class is a parameterized class performing three tests (one with an occupied room, one with
+ * an empty room and one with null input) on a set of 3 inputs.
+ * 
+ * @author Quentin
+ *
+ */
 @RunWith(Parameterized.class)
 public class TestHotelManagerCheckOut{
 	
@@ -37,12 +47,21 @@ public class TestHotelManagerCheckOut{
 		wdateOut = null;
 	}
 	
+	/**
+	 * These parameters are used to cover all the different input cases when performing a check out.
+	 * 
+	 * Rooms couldn't be used here as a parameter since rooms are only instantiate at the same time than 
+	 * the manager.
+	 * 
+	 *@return set of input data for the tests
+	 */
 	@Parameters(name = "{index}:{0},{1}")
 	public static Collection<Object[]> parameters(){
 		return Arrays.asList(new Object[][]
 			{
 				// Well formated data sets
 				{dateOut, "Success"},
+				
 				// Not well formated data sets
 				{null, "No input can be null"},
 				{wdateOut, "Check-out date must be after check-in date"}
@@ -55,6 +74,9 @@ public class TestHotelManagerCheckOut{
 	@Parameter(value=1)
 	public String expectedMessage;
 
+	/**
+	 * Performing the checkout of a room that was booked before. This is the standard case.
+	 */
 	@Test
 	public void testCheckOut_OccupiedRoom(){
 		
@@ -81,6 +103,10 @@ public class TestHotelManagerCheckOut{
 		}
 	}
 	
+	/**
+	 * Testing what happens when trying to check out a room that is not occupied. 
+	 * This doesn't correspond to a normal use of the system.
+	 */
 	@Test
 	public void testCheckOut_EmptyRoom(){
 		
@@ -102,6 +128,10 @@ public class TestHotelManagerCheckOut{
 		}
 	}
 	
+	/**
+	 * Testing what happens when trying to do a check out with a null input for the room. 
+	 * This doesn't correspond to a normal use of the system.
+	 */
 	@Test
 	public void testCheckOut_NullRoom(){
 		

@@ -10,6 +10,13 @@ import org.junit.runners.Parameterized.*;
 
 import hms.model.Occupant;
 
+/**
+ * Parameterized class testing the behavior of the class {@link Occupant} with different
+ * sets of input containing particularly some null values.
+ * 
+ * @author Quentin
+ *
+ */
 @RunWith(Parameterized.class)
 public class TestOccupant {
 
