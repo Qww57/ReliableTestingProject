@@ -1,5 +1,4 @@
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.Arrays;
@@ -54,6 +53,7 @@ public class TestPanelCheckIn {
 		dateOut = null;
 	}
 	
+	@SuppressWarnings("boxing")
 	@Parameters(name = "{index}:{0},{1},{2},{3},{4},{5},{6}")
 	public static Collection<Object[]> parameters(){
 		return Arrays.asList(new Object[][]

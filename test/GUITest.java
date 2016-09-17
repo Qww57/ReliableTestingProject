@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import hms.command.CheckInCommand;
 import hms.command.CheckOutCommand;
+import hms.command.ManageRoomCommand;
 import hms.command.SearchCommand;
 import hms.gui.*;
 import hms.main.HotelManager;
@@ -80,4 +81,9 @@ public class GUITest {
 		//Mock click action of checkInPanel.checkInButton
 		searchPanel.searchButton.doClick();
 	}
+	
+	/**
+	 * TODO Add better parameters in order to have a case where it works
+	 * And create its own test class
+	 */
 }

@@ -8,6 +8,10 @@ import hms.command.CheckInCommand;
 import hms.command.CheckOutCommand;
 import hms.command.ManageRoomCommand;
 import hms.command.SearchCommand;
+import hms.gui.CheckInPanel;
+import hms.gui.CheckOutPanel;
+import hms.gui.ManageRoomPanel;
+import hms.gui.SearchPanel;
 import hms.gui.UI;
 import hms.main.HotelManager;
 
@@ -46,30 +50,45 @@ public class TestUI {
 		assertNotNull(ui.lookAndFeelMenu);
 		assertNotNull(ui.tableView);
 		
+		hms.gui.TableView view = ui.tableView;
+		
 		// Testing the default definition of the current command 
 		assertEquals(CheckInCommand.class, ui.currentCommand.getClass());
+		assertEquals(CheckInPanel.class, ((CheckInCommand) ui.currentCommand).getPanel(view).getClass());
 		
 		// Trying to change the value of the command using the check boxes of the interface
 		ui.checkOut.doClick();
 		assertEquals(CheckOutCommand.class, ui.currentCommand.getClass());
+		assertEquals(CheckOutPanel.class, ((CheckOutCommand) ui.currentCommand).getPanel(view).getClass());
+		
 		ui.search.doClick();
 		assertEquals(SearchCommand.class, ui.currentCommand.getClass());
+		assertEquals(SearchPanel.class, ((SearchCommand) ui.currentCommand).getPanel(view).getClass());
+		
 		ui.manageRooms.doClick();
 		assertEquals(ManageRoomCommand.class, ui.currentCommand.getClass());
+		assertEquals(ManageRoomPanel.class, ((ManageRoomCommand) ui.currentCommand).getPanel(view).getClass());
+		
 		ui.checkIn.doClick();
 		assertEquals(CheckInCommand.class, ui.currentCommand.getClass());
+		assertEquals(CheckInPanel.class, ((CheckInCommand) ui.currentCommand).getPanel(view).getClass());
 				
-		// TODO Testing to change the menu color
-		ui.lookAndFeelMenu.doClick();
-		ui.lookAndFeelMenu.getComponentListeners();		
-		// assertNotNull(ui.lookAndFeelMenu.getActionMap()); 
-		// ActionListener[] actionListeners = ui.lookAndFeelMenu.getActionListeners(); 
-		// ItemListener[] itemListeners = ui.lookAndFeelMenu.getItemListeners();
+		// Testing to change the menu color
+		/* assertEquals(2, ui.lookAndFeelMenu.getItemCount());
+		System.out.println(UIManager.getLookAndFeel());
+		assertTrue(UIManager.getLookAndFeel().toString().contains("metal"));
+		
+		ui.lookAndFeelMenu.getItem(1).doClick();
+		System.out.println(UIManager.getLookAndFeel());
+		assertTrue(UIManager.getLookAndFeel().toString().contains("motif"));
+		
+		ui.lookAndFeelMenu.getItem(0).doClick();
+		System.out.println(UIManager.getLookAndFeel());
+		assertTrue(UIManager.getLookAndFeel().toString().contains("metal")); */
 		
 		// Closing the window
 		WindowListener[] wListeners = ui.getWindowListeners();
 		assertEquals("Wrong number of windows listeners", 1, wListeners.length);
-		// TODO find the code to call line 69
 		ui.dispose();
 	}
 }

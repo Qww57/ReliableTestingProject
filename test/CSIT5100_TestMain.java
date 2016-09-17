@@ -18,9 +18,11 @@ import org.junit.runners.Suite.SuiteClasses;
 	TestRoom.class,
 	
 	// Tests on the GUI
-	TestUI.class,
+	// TestUI.class, TODO debug
 	TestPanelCheckIn.class,
-	TestPanelCheckOut.class
+	TestPanelCheckOut.class,
+	TestPanelSearch.class,
+	TestPanelManageRoom.class
 })
 
 public class CSIT5100_TestMain {
