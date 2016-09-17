@@ -18,7 +18,7 @@ import hms.main.HotelManager;
 import hms.model.Room;
 
 /**
- * Class used in order to all the cases that could happen when using the check out function
+ * Class used in order to test all the cases that could happen when using the check out function
  * from the class {@link HotelManager}.
  * 
  * This class is a parameterized class performing three tests (one with an occupied room, one with

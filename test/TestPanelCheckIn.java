@@ -58,10 +58,34 @@ public class TestPanelCheckIn {
 	public static Collection<Object[]> parameters(){
 		return Arrays.asList(new Object[][]
 			{
-				// Well formated data sets
-				{"X12345678", "Gates", "Standard", "Microsoft", dateIn, false, "01:23:45:67:89:ab"},
-				{"X12345678", "Gates", "Standard", "Microsoft", dateIn, false, ""},
-				
+			// Well formated data sets
+			{"X12345678", "Gates", "Standard", "Microsoft", dateIn, false, ""},
+			{"X12345678", "Gates", "Business", "Microsoft", dateIn, true, "01:23:45:67:89:ab"},
+			
+			// Data sets with not allowed null inputs
+			{null, "Gates", "Business", "Microsoft", dateIn, false, ""}, 
+			{"X12345678", null, "Business", "Microsoft", dateIn, false, ""},
+			{"X12345678", "Gates", null, "Microsoft", dateIn, false, ""},
+			{"X12345678", "Gates", "Business", null, dateIn, false, ""},
+			{"X12345678", "Gates", "Standard", "Microsoft", null, false, ""},
+			{"X12345678", "Gates", "Standard", "Microsoft", dateIn, false, null},
+			
+			// Data sets with not allowed empty inputs
+			{"", "Gates", "Business", "Microsoft", dateIn, false, ""},
+			{"X12345678", "", "Business", "Microsoft", dateIn, false, ""},
+			{"X12345678", "Gates", "Business", "", dateIn, false, ""},
+			
+			// Data set with inconsistent information
+			{"X12345678", "Gates", "Standard", "Microsoft", dateIn, true, ""},
+			
+			// Data set with invalid room type
+			{"X12345678", "Gates", "Luxuous", "Microsoft", dateIn, false, ""},
+			
+			// Data set with invalid ID
+			{"X12345", "Gates", "Business", "Microsoft", dateIn, false, ""},
+			
+			// Data set with invalid ethernetAdress
+			{"X12345678", "Gates", "Business", "Microsoft", dateIn, true, "XXX"}
 			});
 	}
 	
@@ -87,7 +111,7 @@ public class TestPanelCheckIn {
 	public String ethernetAddress;
 	
 	/**
-	 * Example given by the teacher
+	 * Test of a presidential room
 	 */
 	@Test
 	public void test() {
@@ -123,7 +147,13 @@ public class TestPanelCheckIn {
 		//Mock click action of checkInPanel.checkInButton
 		checkInPanel.checkInButton.doClick();
 		
-		assertEquals(checkInPanel.typeField.getSelectedItem(), "Standard");
-		assertFalse(checkInPanel.command.dataServiceRequired);
+		// Replacing by the default values
+		if(ID == null){ID = "";}
+		if(name == null){name = "";}
+		if(type == null){type = "Standard";}
+		
+		assertEquals(name, checkInPanel.nameField.getText());
+		assertEquals(ID, checkInPanel.IDField.getText());
+		assertEquals(checkInPanel.typeField.getSelectedItem(), type);
 	}
 }	
