@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import hms.command.CheckInCommand;
 import hms.command.CheckOutCommand;
-import hms.command.ManageRoomCommand;
 import hms.command.SearchCommand;
 import hms.gui.*;
 import hms.main.HotelManager;
