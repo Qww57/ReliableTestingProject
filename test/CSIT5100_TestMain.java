@@ -4,8 +4,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({ 
-	// add your test classes here
-	GUITest.class,
 	
 	// Tests on the hotel manager
 	TestHotelManager.class,
@@ -18,7 +16,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	TestRoom.class,
 	
 	// Tests on the GUI
-	// TestUI.class, TODO debug
+	TestUI.class, //TODO debug
 	TestPanelCheckIn.class,
 	TestPanelCheckOut.class,
 	TestPanelSearch.class,
