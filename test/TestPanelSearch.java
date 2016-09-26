@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import javax.swing.JTable;
 import javax.swing.table.TableModel;
 
 import org.junit.AfterClass;
@@ -25,6 +24,18 @@ import hms.gui.SearchPanel;
 import hms.main.HotelManager;
 import hms.model.Room;
 
+
+/**
+ * Tests of the {@link SearchPanel} class. This class is a parameterized class in order to check
+ * perform tests on different input values, here depending on the search type (by ID, name, type or
+ * company).
+ * 
+ * The tests performed are the following ones:
+ * - TODO
+ * 
+ * @author Quentin
+ *
+ */
 @RunWith(Parameterized.class)
 public class TestPanelSearch {
 	
@@ -189,13 +200,20 @@ public class TestPanelSearch {
 	 * @param tableLine - Line of the model to be checked
 	 */
 	private static void compare_information(Room room, TableModel model, int tableLine){
+		
 		assertEquals(room.getFloorNo() + "-" + room.getRoomNo(), model.getValueAt(tableLine, 0).toString());
 		assertEquals(room.getTypeString(), model.getValueAt(tableLine, 1).toString());
 		assertEquals(room.getCapacity(), Integer.parseInt(model.getValueAt(tableLine, 2).toString()));
 		assertEquals(room.getRate(), Double.parseDouble(model.getValueAt(tableLine, 3).toString()), 0.001);
-		if (room.getType() == 1) {assertEquals("N/A", model.getValueAt(tableLine, 4).toString());}
-		else if (room.getOccupation().isDataServiceRequired()) {assertEquals("In used", model.getValueAt(tableLine, 4).toString());}
-		else {assertEquals("Not in used", model.getValueAt(tableLine, 4).toString());}
+		
+		if (room.getType() == 1) {
+			assertEquals("N/A", model.getValueAt(tableLine, 4).toString());
+		} else if (room.getOccupation().isDataServiceRequired()) {
+			assertEquals("In used", model.getValueAt(tableLine, 4).toString());
+		} else {
+			assertEquals("Not in used", model.getValueAt(tableLine, 4).toString());
+		}
+		
 		assertEquals(room.getOccupation().getEthernetAddress(), model.getValueAt(tableLine, 5).toString());
 		assertEquals(room.getOccupation().getOccupant().getName(), model.getValueAt(tableLine, 6).toString());
 		assertEquals(room.getOccupation().getOccupant().getType(), model.getValueAt(tableLine, 7).toString());
