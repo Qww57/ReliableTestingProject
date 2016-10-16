@@ -175,6 +175,9 @@ public class TestPanelSearch {
 		assertEquals(0, searchPanel.searchResults.length);
 	}
 	
+	/**
+	 * Testing failing and showing a problem in the source code
+	 */
 	@Test
 	public void test_searchPanel_null_room(){			
 		

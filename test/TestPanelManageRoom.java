@@ -2,7 +2,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -160,26 +159,32 @@ public class TestPanelManageRoom {
 		assertEquals(selectedRoom.getTypeString(), manageRoomPanel.roomType.getText());
 		assertNotNull(manageRoomPanel.discount);
 		
+		// Getting old values 
+		double oldRate = manageRoomPanel.command.selectedRoom.getRate();
+		double oldDiscount = manageRoomPanel.command.selectedRoom.getRate();
+		
 		// Setting the input parameters and editing the room
 		manageRoomPanel.rate.setText(rate); // Rate without discount
 		manageRoomPanel.discount.setText(discount); // Discount percentage
 		manageRoomPanel.updateBtn.doClick();
 		
-		if(expectedFail)
+		if(expectedFail){
 			assertEquals(expectedError, errContent.toString());
-		
-		try{
-			@SuppressWarnings("unused")
+			assertEquals(oldRate, manageRoomPanel.command.selectedRoom.getRate(), 0.01);
+			assertEquals(oldDiscount, manageRoomPanel.command.selectedRoom.getRate(), 0.01);
+		}
+		else{
+			// Defining the expected value
 			double drate = Double.parseDouble(rate) * (1 - Double.parseDouble(discount)/100);
-			// assertEquals(drate, manageRoomPanel.command.selectedRoom.getRate(), 0.001);
+			
+			// Testing that the selected room has been updated in the command
+			assertEquals(drate, manageRoomPanel.command.selectedRoom.getRate(), 0.01);
 		
-			/* int floorNo = Integer.parseInt(manageRoomPanel.floorNo.getText());
-			int roomNo = Integer.parseInt(manageRoomPanel.roomNo.getText());
-			Room updatedRoom = manager.getRoom(roomNo, floorNo);
-			assertEquals(500,updatedRoom.getRate(), 0.001); */
-		} catch (Exception e){
-			if (!expectedFail)
-				fail("Shouldn't have failed");
+			// Testing that the room has been updated in the room list
+			int floorNo = Integer.parseInt(manageRoomPanel.floorNo.getText()) - 1;
+			int roomNo = Integer.parseInt(manageRoomPanel.roomNo.getText()) - 1;
+			Room updatedRoom = manager.getRoom(floorNo, roomNo);
+			assertEquals(drate, updatedRoom.getRate(), 001); 
 		}
 	}
 	
