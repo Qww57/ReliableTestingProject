@@ -23,8 +23,11 @@ import hms.model.Room;
  * user interface. 
  * 
  * The tests performed are similar to the ones in {@link TestHotelManagerCheckOut}.
- * This class is a parameterized class performing three tests (one with an occupied room with data,
+ * This class is a parameterized class performing four tests (one with an occupied room with data,
  * one occupied without data, one with an empty room and one with null input) on a set of 3 inputs. 
+ * 
+ * Two other tests have been added to check the consistency between the room information and the table 
+ * displayed on the screen and to check the initialization of all components of the Panel.
  *  
  * @author Quentin
  *

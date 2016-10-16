@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.swing.JTable;
+import javax.swing.table.TableModel;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -27,6 +28,20 @@ import hms.gui.CheckInPanel;
 import hms.main.HotelManager;
 import hms.model.Room;
 
+/**
+ * Class used in order to test all the cases that could happen when performing a check in with the 
+ * user interface. 
+ * 
+ * The tests performed are similar to the ones in {@link TestHotelManagerCheckIn}.
+ * This class is a parameterized class performing three tests (one with an occupied room, one with an 
+ * empty room and one with null input) on a set of 15 inputs. 
+ * 
+ * Two other tests have been added to check the consistency between the room information and the table 
+ * displayed on the screen and to check the initialization of all components of the Panel.
+ *  
+ * @author Quentin
+ *
+ */
 @RunWith(Parameterized.class)
 public class TestPanelCheckIn {
 
@@ -92,7 +107,10 @@ public class TestPanelCheckIn {
 			{"X12345", "Gates", "Business", "Microsoft", dateIn, "No", "", 1, true},
 			
 			// Data set with invalid ethernetAdress
-			{"X12345678", "Gates", "Business", "Microsoft", dateIn, "Yes", "XXX", 1, true}
+			{"X12345678", "Gates", "Business", "Microsoft", dateIn, "Yes", "XXX", 1, true},
+			
+			// Data set with invalid date
+			{"X12345678", "Gates", "Business", "Microsoft", "INVALID DATE", "Yes", "01:23:45:67:89:ab", 1, true}
 			});
 	}
 	
@@ -137,9 +155,7 @@ public class TestPanelCheckIn {
 		checkInPanel.nameField.setText(name);
 		checkInPanel.companyField.setText(company);
 		checkInPanel.typeField.setSelectedItem(type);
-		// FIXME not selecting it correctly
 		checkInPanel.dataServiceRequiredBox.setSelectedItem(dataServiceRequired);
-		checkInPanel.command.dataServiceRequired = true;
 		checkInPanel.ethernetAddressField.setText(ethernetAddress);
 		assertEquals(6, checkInPanel.availableRooms.length);
 				
@@ -221,9 +237,7 @@ public class TestPanelCheckIn {
 		checkInPanel.nameField.setText(name);
 		checkInPanel.companyField.setText(company);
 		checkInPanel.typeField.setSelectedItem(type);
-		// FIXME not selecting it correctly
 		checkInPanel.dataServiceRequiredBox.setSelectedItem(dataServiceRequired);
-		checkInPanel.command.dataServiceRequired = true;
 		checkInPanel.ethernetAddressField.setText(ethernetAddress);
 		assertEquals(6, checkInPanel.availableRooms.length);
 		
@@ -233,6 +247,42 @@ public class TestPanelCheckIn {
 		
 		checkInPanel.checkInButton.doClick();
 	}
+	
+	/**
+	 * Checking that the information in the available room table is consistent with
+	 * the information displayed in the available rooms panel.
+	 */
+	@Test
+	public void test_getCommande(){
+		CheckInCommand cmd = new CheckInCommand(manager);
+		
+		//Create a CheckInPanel object
+		CheckInPanel checkInPanel = new CheckInPanel(cmd, manager);
+		test_initialization(checkInPanel);
+		
+		JTable table = checkInPanel.availableRoomTable;
+		for (int i = 0; i < checkInPanel.availableRooms.length; i++){
+			int tableLine = 1;
+			table.setRowSelectionInterval(tableLine, tableLine);
+			assertEquals(tableLine, table.getSelectedRow()); 
+			assertNotNull(checkInPanel.command.selectedRoom);
+		
+			Room room = checkInPanel.command.selectedRoom;
+			TableModel model = checkInPanel.availableRoomTable.getModel();
+			assertEquals(room.getFloorNo() + "-" + room.getRoomNo(), model.getValueAt(tableLine, 0).toString());
+			assertEquals(room.getTypeString(), model.getValueAt(tableLine, 1).toString());
+			assertEquals(room.getCapacity(), Integer.parseInt(model.getValueAt(tableLine, 2).toString()));
+			assertEquals(room.getRate(), Double.parseDouble(model.getValueAt(tableLine, 3).toString()), 0.001);
+			if (room.getType() == 1)
+				assertEquals("N/A", model.getValueAt(tableLine, 4).toString());
+			else
+				assertEquals("Not in used", model.getValueAt(tableLine, 4).toString());
+			
+			// Testing the default value of the table
+			assertEquals("", model.getValueAt(tableLine, 5));
+		}	
+	}
+	
 	
 	private static void test_initialization(CheckInPanel checkInPanel){
 		assertNotNull(checkInPanel.hotelManager);

@@ -16,7 +16,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	TestRoom.class,
 	
 	// Tests on the GUI
-	TestUI.class, //TODO debug
+	TestUI.class, 
 	TestPanelCheckIn.class,
 	TestPanelCheckOut.class,
 	TestPanelSearch.class,

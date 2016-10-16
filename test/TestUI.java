@@ -2,6 +2,8 @@ import static org.junit.Assert.*;
 
 import java.awt.event.WindowListener;
 
+import javax.swing.UIManager;
+
 import org.junit.Test;
 
 import hms.command.CheckInCommand;
@@ -22,8 +24,8 @@ import hms.main.HotelManager;
  *  - Initialization  of the UI and its class members
  *  - Testing that the default command is CheckIn
  *  - Changing the current command from UI 
- *  - TODO Changing the design of the UI 
- *  - TODO Closing the window
+ *  - FIXME Changing the design of the UI (raising an error)
+ *  - FIXME Closing the window (does not work)
  * 
  * @author Quentin
  *
@@ -74,7 +76,7 @@ public class TestUI {
 		assertEquals(CheckInPanel.class, ((CheckInCommand) ui.currentCommand).getPanel(view).getClass());
 				
 		// Testing to change the menu color
-		/* assertEquals(2, ui.lookAndFeelMenu.getItemCount());
+		assertEquals(2, ui.lookAndFeelMenu.getItemCount());
 		System.out.println(UIManager.getLookAndFeel());
 		assertTrue(UIManager.getLookAndFeel().toString().contains("metal"));
 		
@@ -84,11 +86,12 @@ public class TestUI {
 		
 		ui.lookAndFeelMenu.getItem(0).doClick();
 		System.out.println(UIManager.getLookAndFeel());
-		assertTrue(UIManager.getLookAndFeel().toString().contains("metal")); */
+		assertTrue(UIManager.getLookAndFeel().toString().contains("metal")); 
 		
 		// Closing the window
 		WindowListener[] wListeners = ui.getWindowListeners();
 		assertEquals("Wrong number of windows listeners", 1, wListeners.length);
+
 		ui.dispose();
 	}
 }

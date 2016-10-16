@@ -130,7 +130,7 @@ public class TestHotelManagerCheckIn{
 	public String expectedMessage;
 	
 	/**
-	 * Tests made in case of a presidential room, that is allowed to get internet.
+	 * Tests made in case of a presidential room, that is allowed to get the Internet.
 	 * 
 	 * This test is a bit longer than the other ones since it's also verifying that the check in has been done and registered
 	 * correctly.
@@ -194,6 +194,4 @@ public class TestHotelManagerCheckIn{
 		String expected = "No input can be null";
 		assertEquals(expected + "has failed", expected, checkin);
 	}
-
-	
 }

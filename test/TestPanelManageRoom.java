@@ -27,9 +27,19 @@ import hms.main.HotelManager;
 import hms.model.Room;
 
 /**
- * Class testing {@link ManageRoomPanel}. 
+ * Parametrized class testing {@link ManageRoomPanel}. 
  * 
- * Note that two of the tests are expected to fail here, since they highlight an implementation inconsistency.
+ * This class performs 4 tests (update of one room’s rate and discount, cancel of the intended 
+ * changes of one room’s rate and discount, test of the case where no room as been selected, 
+ * test on a specific error) on a set of 11 inputs.
+ * 
+ * Two other tests have been added to check the consistency between the room information and the table 
+ * displayed on the screen and to check the initialization of all components of the Panel.
+ * 
+ * These tests also focuses on testing the printed outputs since the ManageRoomPanel deals with a lot
+ * of printed exceptions.
+ * 
+ * Note that four of the tests are expected to fail here, since they highlight an implementation inconsistency.
  * 
  * @author Quentin
  *
@@ -56,7 +66,8 @@ public class TestPanelManageRoom {
 				
 				// Not well formated data sets
 				{1, "0", "50", true, "Error: Invalid room rate or discount!"}, // Room free should be above 0
-				{2, "0", "150", true, "Error: Invalid room rate or discount!"}, // Discount should be less than 100
+				{1, "50", "150", true, "Error: Invalid room rate or discount!"}, // Discount should be less than 100
+				{2, "0", "150", true, "Error: Invalid room rate or discount!"}, // Both previous ones
 				{3, "50", "-50", true, "Error: Invalid room rate or discount!"}, // Discount should positive
 				{4, "-10", "-50", true, "Error: Invalid room rate or discount!"}, // Discount and rate should be positive
 				

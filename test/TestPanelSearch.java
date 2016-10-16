@@ -31,7 +31,16 @@ import hms.model.Room;
  * company).
  * 
  * The tests performed are the following ones:
- * - TODO
+ * - search for a booked standard room
+ * - search for a booked presidential room without data
+ * - search for a booked presidential room with data
+ * - search when no room is booked
+ * - search when the selected room is null
+ * 
+ * One other tests has been added to check the consistency between the room information and the table 
+ * displayed on the screen.
+ * 
+ * Note that this class should create 4 errors highlighting an implementation error in getValues().
  * 
  * @author Quentin
  *
